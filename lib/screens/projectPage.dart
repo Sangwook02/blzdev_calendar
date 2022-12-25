@@ -1,18 +1,18 @@
-import 'package:blzdev_calendar/screens/projectPage.dart';
+import 'package:blzdev_calendar/screens/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class mainPage extends StatefulWidget {
-  static String id = 'mainPage';
+class projectPage extends StatefulWidget {
+  const projectPage({Key? key}) : super(key: key);
 
   @override
-  State<mainPage> createState() => _mainPageState();
+  State<projectPage> createState() => _projectPageState();
 }
 
 CalendarBuilders _customCalendar = CalendarBuilders();
 
-class _mainPageState extends State<mainPage> {
+class _projectPageState extends State<projectPage> {
   DateTime selectedDay = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   DateTime focusedDay = DateTime.now();
   @override
@@ -20,8 +20,17 @@ class _mainPageState extends State<mainPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 160, 205, 242),
       appBar: AppBar(
-        title: Text("blzdev calendar"),
+        title: Text("project"),
         backgroundColor: Color.fromARGB(255, 48, 162, 255),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => mainPage()));
+            },
+            icon: Icon(Icons.home),
+            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+          )
+        ],
       ),
       body: TableCalendar(
         rowHeight: 100,
@@ -42,12 +51,12 @@ class _mainPageState extends State<mainPage> {
         },
         daysOfWeekHeight: 30,
         calendarBuilders: _customCalendar,
-        headerStyle: HeaderStyle(
+        headerStyle: const HeaderStyle(
           titleCentered: true,
           // delete 2weeks
           formatButtonVisible: false,
         ),
-        calendarStyle: CalendarStyle(
+        calendarStyle: const CalendarStyle(
             canMarkersOverflow: false,
             markersAutoAligned: true,
             markersMaxCount: 3,
@@ -71,32 +80,34 @@ class _mainPageState extends State<mainPage> {
               title: Text("project1"),
               onTap: () {
                 print("project1로 이동");
-                Navigator.push(context, MaterialPageRoute(builder: (context) => projectPage()));
               },
             ),
             ListTile(
               title: Text("project2"),
               onTap: () {
                 print("project2로 이동");
-                Navigator.push(context, MaterialPageRoute(builder: (context) => projectPage()));
               },
             ),
             ListTile(
               title: Text("project3"),
               onTap: () {
                 print("project3로 이동");
-                Navigator.push(context, MaterialPageRoute(builder: (context) => projectPage()));
               },
             ),
             ListTile(
               title: Text("project4"),
               onTap: () {
                 print("project4로 이동");
-                Navigator.push(context, MaterialPageRoute(builder: (context) => projectPage()));
               },
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("pressed");
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
