@@ -1,4 +1,5 @@
 import 'package:blzdev_calendar/screens/mainPage.dart';
+import 'package:blzdev_calendar/screens/newSchedulePage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -45,6 +46,7 @@ class _projectPageState extends State<projectPage> {
             this.selectedDay = selectedDay;
             this.focusedDay = focusedDay;
           });
+          showData(selectedDay, context);
         },
         selectedDayPredicate: (DateTime d) {
           return isSameDay(selectedDay, d);
@@ -106,9 +108,96 @@ class _projectPageState extends State<projectPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("pressed");
+          Navigator.push(context, MaterialPageRoute(builder: (context) => newSchedulePage()));
         },
         child: const Icon(Icons.add),
       ),
     );
   }
+}
+
+void showData(DateTime selectedDay, BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Container(
+            width: 600.0,
+            height: 800.0,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 25.0,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 50.0,
+                    ),
+                    Text(
+                      "project_schedule",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {}, icon: Icon(Icons.add)))
+                  ],
+                ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: 330.0,
+                            width: 500.0,
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 206, 206, 206), borderRadius: BorderRadius.all(Radius.circular(10))),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 50.0,
+                    ),
+                    Text(
+                      "dev_log",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 67.5,
+                    ),
+                    Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {}, icon: Icon(Icons.add)))
+                  ],
+                ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: 330.0,
+                            width: 500.0,
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 206, 206, 206), borderRadius: BorderRadius.all(Radius.circular(10))),
+                            child: ListBody(children: []),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                //SafeArea(child: ListView.builder(itemBuilder: itemBuilder))
+              ],
+            ),
+          ),
+        );
+      });
 }
