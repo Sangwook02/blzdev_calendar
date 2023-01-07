@@ -1,3 +1,4 @@
+import 'package:blzdev_calendar/models/user.dart';
 import 'package:blzdev_calendar/screens/mainPage.dart';
 import 'package:blzdev_calendar/screens/newSchedulePage.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _projectPageState extends State<projectPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => mainPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => mainPage(user: User(id: "id", name: "name", token: "token"))));
             },
             icon: Icon(Icons.home),
             padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
